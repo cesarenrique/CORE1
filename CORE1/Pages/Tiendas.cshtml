@@ -1,0 +1,17 @@
+﻿
+
+@page
+@model CORE1.Pages.TiendaModel
+@{
+	ViewData["Title"] = "Tiendas page";
+}
+
+<h1>Tiendas</h1>
+
+
+<ul>
+	@foreach (Models.Tienda t in Model.Tiendas){
+
+		<li>@t.nombre (<a href="mailto:@t.email">@t.email</a>)</li>
+	}
+</ul>
