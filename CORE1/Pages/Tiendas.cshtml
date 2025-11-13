@@ -15,6 +15,7 @@
 			<th>Dirección</th>
 			<th><a asp-page="./Tiendas" asp-route-orden="P" asp-route-sentido="@Model.sentido">Población</a></th>
 			<th>Email</th>
+			<th>Ver</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,6 +27,7 @@
 				<td>@t.direccion</td>
 				<td>@t.localidad</td>
 				<td>@t.email</td>
+				    <td><a  class="btn-dark p-1 " asp-page="./Detalle/" asp-route-id="@t.id" > Ver </a></td>
 
 			</tr>
 		}

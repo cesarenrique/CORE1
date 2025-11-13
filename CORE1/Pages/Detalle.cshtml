@@ -1,0 +1,26 @@
+﻿@page "{id:decimal}"
+@model CORE1.Pages.DetalleModel
+@{
+	ViewData["Title"] = "Detalle Tienda";
+}
+
+<h1>DAtos de nuestra de @Model.tienda.nombre</h1>
+
+<table class="table table-striped table-bordered">
+	<tr>
+		<th>Nombre</th>
+		<td>@Model.tienda.nombre</td>
+	</tr>
+	<tr>
+		<th>Dirección</th>
+		<td>@Model.tienda.direccion</td>
+	</tr>
+	<tr>
+		<th>Población</th>
+		<td>@Model.tienda.localidad</td>
+	</tr>
+	<tr>
+		<th>Email</th>
+		<td>@Model.tienda.email</td>
+	</tr>
+</table>
