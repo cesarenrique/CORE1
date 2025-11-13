@@ -8,10 +8,46 @@ namespace CORE1.Pages
     {
         [BindProperty]
         public List<Tienda> Tiendas { get; set; }
-        public void OnGet()
+        public string orden { get; set; }
+        public string sentido { get; set; }
+
+        public void OnGet(string orden="N",string sentido="A")
         {
             Services.Service service = new Services.Service();
-            Tiendas = service.GetTiendas();
+            IQueryable<Tienda> query = service.GetTiendas().AsQueryable();
+           
+            if(string.IsNullOrEmpty(orden))
+            {
+                this.orden = orden;
+            }
+
+            if(string.IsNullOrEmpty(sentido))
+            {
+                this.sentido = sentido;
+            }
+            switch(orden+sentido)
+            {
+                case "ND":
+                    query=query.OrderByDescending(t => t.nombre);
+                    break;
+                case "NA":
+                    query = query.OrderBy(t => t.nombre) ;
+                    break;
+                case "PD":
+                    query = query.OrderByDescending(t => t.localidad);
+                    break;
+                case "PA":
+                    query = query.OrderBy(t => t.localidad) ;
+                    break;
+                default:
+                    query = query.OrderBy(t => t.nombre);
+                    break;
+
+            }
+
+            this.sentido=(sentido=="A")?"D":"A";
+            this.orden=orden;
+            this.Tiendas = query.ToList();
         }
 
     }

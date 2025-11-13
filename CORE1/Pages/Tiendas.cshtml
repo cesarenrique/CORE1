@@ -11,9 +11,9 @@
 <table class="table table-striped table-bordered"
 	<thead>
 		<tr>
-			<th>Nombre</th>
+			<th><a asp-page="./Tiendas" asp-route-orden="N" asp-route-sentido="@Model.sentido">Nombre</a></th>
 			<th>Dirección</th>
-			<th>Población</th>
+			<th><a asp-page="./Tiendas" asp-route-orden="P" asp-route-sentido="@Model.sentido">Población</a></th>
 			<th>Email</th>
 		</tr>
 	</thead>
