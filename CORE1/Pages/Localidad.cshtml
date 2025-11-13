@@ -1,12 +1,10 @@
-﻿
-
-@page
-@model CORE1.Pages.TiendasModel
+﻿@page "{id:int}"
+@model CORE1.Pages.LocalidadModel
 @{
-	ViewData["Title"] = "Tiendas page";
+	ViewData["Title"] = "Tiendas Localidad page";
 }
 
-<h1>Tiendas</h1>
+<h1>Tiendas Model.localidad.nombre</h1>
 <h2>
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="menuProductos" role="button"
@@ -15,7 +13,7 @@
 		</a>
 
 		<ul class="dropdown-menu" aria-labelledby="menuProductos">
-			@foreach(Models.Localidad loc in Model.Localidades)
+			@foreach (Models.Localidad loc in Model.Localidades)
 			{
 				<li><a class="dropdown-item" asp-page="./Localidad/" asp-route-id=@loc.Id">@loc.Nombre</a></li>
 			}
@@ -34,18 +32,19 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (Models.Tienda t in Model.Tiendas){
-	
-			<tr>
+		@foreach (Models.Tienda t in Model.Tiendas)
+		{
 
-				<td>@t.nombre</td>
-				<td>@t.direccion</td>
-				<td>@t.localidad.Nombre</td>
-				<td>@t.email</td>
-				    <td><a  class="btn-dark p-1 " asp-page="./Detalle/" asp-route-id="@t.id" > Ver </a></td>
+				<tr>
 
-			</tr>
+					<td>@t.nombre</td>
+					<td>@t.direccion</td>
+					<td>@t.localidad.Nombre</td>
+					<td>@t.email</td>
+					    <td><a  class="btn-dark p-1 " asp-page="./Detalle/" asp-route-id="@t.id" > Ver </a></td>
+
+				</tr>
 		}
 	</tbody>
-	
+
 </table>

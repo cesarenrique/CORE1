@@ -4,43 +4,47 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CORE1.Pages
 {
-    public class TiendasModel : PageModel
+    public class LocalidadModel : PageModel
     {
+
         [BindProperty]
         public List<Tienda> Tiendas { get; set; }
 
         [BindProperty]
         public List<Localidad> Localidades { get; set; }
+
+        [BindProperty]
+        public Localidad localidad { get; set; }
         public string orden { get; set; }
         public string sentido { get; set; }
 
-        public void OnGet(string orden="N",string sentido="A")
+        public void OnGet(int id,string orden = "N", string sentido = "A")
         {
             Services.Service service = new Services.Service();
             IQueryable<Tienda> query = service.GetTiendas().AsQueryable();
-           
-            if(string.IsNullOrEmpty(orden))
+
+            if (string.IsNullOrEmpty(orden))
             {
                 this.orden = orden;
             }
 
-            if(string.IsNullOrEmpty(sentido))
+            if (string.IsNullOrEmpty(sentido))
             {
                 this.sentido = sentido;
             }
-            switch(orden+sentido)
+            switch (orden + sentido)
             {
                 case "ND":
-                    query=query.OrderByDescending(t => t.nombre);
+                    query = query.OrderByDescending(t => t.nombre);
                     break;
                 case "NA":
-                    query = query.OrderBy(t => t.nombre) ;
+                    query = query.OrderBy(t => t.nombre);
                     break;
                 case "PD":
-                    query = query.OrderByDescending(t => t.localidad.Nombre);
+                    query = query.OrderByDescending(t => t.localidad);
                     break;
                 case "PA":
-                    query = query.OrderBy(t => t.localidad.Nombre) ;
+                    query = query.OrderBy(t => t.localidad);
                     break;
                 default:
                     query = query.OrderBy(t => t.nombre);
@@ -48,11 +52,13 @@ namespace CORE1.Pages
 
             }
 
-            this.sentido=(sentido=="A")?"D":"A";
-            this.orden=orden;
-            this.Tiendas = query.ToList();
+            this.sentido = (sentido == "A") ? "D" : "A";
+            this.orden = orden;
+            this.Tiendas = query.Where(p=> p.localidad.Id ==id).ToList();
             this.Localidades = service.GetLocalidades();
         }
 
+
     }
+
 }

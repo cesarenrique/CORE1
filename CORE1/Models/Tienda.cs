@@ -5,12 +5,12 @@
         public decimal id { get; set; }
         public string nombre { get; set; }
         public string direccion { get; set; }
-        public string localidad { get; set; }
+        public Localidad localidad { get; set; }
         public string email { get; set; }
         public string telefonos { get; set; }
 
 
-        public Tienda(decimal i=0,string nombre="", string direccion="", string localidad="", string email="", string telefonos = "")
+        public Tienda(decimal i=0,string nombre="", string direccion="", Localidad localidad=null, string email="", string telefonos = "")
         {
             this.id = i;
             this.nombre = nombre;

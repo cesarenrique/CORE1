@@ -6,6 +6,7 @@ namespace CORE1.Pages
 {
     public class DetalleModel : PageModel
     {
+       
         public Tienda tienda;
         public IActionResult OnGet(decimal id)
         {
