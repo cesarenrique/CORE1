@@ -41,10 +41,10 @@ namespace CORE1.Pages
                     query = query.OrderBy(t => t.nombre);
                     break;
                 case "PD":
-                    query = query.OrderByDescending(t => t.localidad);
+                    query = query.OrderByDescending(t => t.localidad_id);
                     break;
                 case "PA":
-                    query = query.OrderBy(t => t.localidad);
+                    query = query.OrderBy(t => t.localidad_id);
                     break;
                 default:
                     query = query.OrderBy(t => t.nombre);
@@ -54,8 +54,12 @@ namespace CORE1.Pages
 
             this.sentido = (sentido == "A") ? "D" : "A";
             this.orden = orden;
-            this.Tiendas = query.Where(p=> p.localidad.Id ==id).ToList();
+            this.Tiendas = query.Where(p=> p.localidad_id ==id).ToList();
             this.Localidades = service.GetLocalidades();
+
+            IQueryable<Localidad> query2 = service.GetLocalidades().AsQueryable();
+            this.localidad = query2.Where(l => l.id == id).FirstOrDefault();
+
         }
 
 

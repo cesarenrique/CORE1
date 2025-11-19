@@ -4,7 +4,7 @@
 	ViewData["Title"] = "Tiendas Localidad page";
 }
 
-<h1>Tiendas Model.localidad.nombre</h1>
+<h1>Tiendas @Model.localidad.Nombre</h1>
 <h2>
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="menuProductos" role="button"
@@ -15,7 +15,7 @@
 		<ul class="dropdown-menu" aria-labelledby="menuProductos">
 			@foreach (Models.Localidad loc in Model.Localidades)
 			{
-				<li><a class="dropdown-item" asp-page="./Localidad/" asp-route-id=@loc.Id">@loc.Nombre</a></li>
+				<li><a class="dropdown-item" asp-page="./Localidad/" asp-route-id=@loc.id">@loc.Nombre</a></li>
 			}
 
 		</ul>
@@ -39,7 +39,7 @@
 
 					<td>@t.nombre</td>
 					<td>@t.direccion</td>
-					<td>@t.localidad.Nombre</td>
+						<td>@Model.Localidades.Where(p => p.id == t.localidad_id).FirstOrDefault().Nombre</td>
 					<td>@t.email</td>
 					    <td><a  class="btn-dark p-1 " asp-page="./Detalle/" asp-route-id="@t.id" > Ver </a></td>
 

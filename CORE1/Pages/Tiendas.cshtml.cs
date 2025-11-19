@@ -37,10 +37,10 @@ namespace CORE1.Pages
                     query = query.OrderBy(t => t.nombre) ;
                     break;
                 case "PD":
-                    query = query.OrderByDescending(t => t.localidad.Nombre);
+                    query = query.OrderByDescending(t => t.localidad_id);
                     break;
                 case "PA":
-                    query = query.OrderBy(t => t.localidad.Nombre) ;
+                    query = query.OrderBy(t => t.localidad_id) ;
                     break;
                 default:
                     query = query.OrderBy(t => t.nombre);

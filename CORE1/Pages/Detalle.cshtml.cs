@@ -8,6 +8,9 @@ namespace CORE1.Pages
     {
        
         public Tienda tienda;
+
+        [BindProperty]
+        public Localidad localidad{ get; set; }
         public IActionResult OnGet(decimal id)
         {
             Services.Service service = new Services.Service();
@@ -16,6 +19,9 @@ namespace CORE1.Pages
             {
                 return NotFound();
             }
+           
+            this.localidad = service.GetLocalidades().Where(p => p.id == this.tienda.localidad_id).FirstOrDefault(); ;
+
             return Page();
         }
     }

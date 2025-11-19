@@ -1,4 +1,4 @@
-﻿@page "{id:decimal}"
+﻿@page "tienda-{id:decimal}"
 @model CORE1.Pages.DetalleModel
 @{
 	ViewData["Title"] = "Detalle Tienda";
@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<th>Población</th>
-		<td>@Model.tienda.localidad</td>
+		<td>@Model.localidad.Nombre</td>
 	</tr>
 	<tr>
 		<th>Email</th>

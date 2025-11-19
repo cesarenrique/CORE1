@@ -2,11 +2,11 @@
 {
     public class Localidad
     {
-        public int Id { get; set; }
+        public decimal id { get; set; }
         public string Nombre { get; set; }
         public Localidad(int id=0, string nombre="")
         {
-            this.Id = id;
+            this.id = id;
             this.Nombre = nombre;
         }
     }

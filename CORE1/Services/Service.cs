@@ -8,12 +8,12 @@ namespace CORE1.Services
         {
             List<Tienda> tiendas = new List<Tienda>()
             {
-                new Tienda(1,"Tienda A", "Calle 123", new Localidad(1,"Ciudad X"), "usuario@gmail.com ","123456789"),
-                new Tienda(2,"Tienda B", "Avenida 456", new Localidad(2,"Ciudad Y"), "usuario2@gmail.com ","1234590"),
-                new Tienda(4,"Tienda C", "Boulevard 789", new Localidad(3,"Ciudad Z"), "usuario3@gmail.com","987654321"),
-                new Tienda(5,"Tienda D", "Boulevard 789",  new Localidad(3,"Ciudad Z"), "usuario3@gmail.com","987654321"),
-                new Tienda(6,"Tienda E", "Boulevard 789",  new Localidad(3,"Ciudad Z"), "usuario3@gmail.com","987654321"),
-                new Tienda(7,"Tienda F", "Boulevard 789",  new Localidad(3,"Ciudad Z"), "usuario3@gmail.com","987654321"),
+                new Tienda(1,"Tienda A", "Calle 123", 1, "usuario@gmail.com ","123456789"),
+                new Tienda(2,"Tienda B", "Avenida 456", 2, "usuario2@gmail.com ","1234590"),
+                new Tienda(4,"Tienda C", "Boulevard 789", 3, "usuario3@gmail.com","987654321"),
+                new Tienda(5,"Tienda D", "Boulevard 789",  3, "usuario3@gmail.com","987654321"),
+                new Tienda(6,"Tienda E", "Boulevard 789",  3, "usuario3@gmail.com","987654321"),
+                new Tienda(7,"Tienda F", "Boulevard 789",  3, "usuario3@gmail.com","987654321"),
             };
 
             return tiendas;
