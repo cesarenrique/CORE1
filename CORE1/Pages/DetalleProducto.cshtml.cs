@@ -22,20 +22,21 @@ namespace CORE1.Pages
 
         public async Task<IActionResult> OnGetAsync(decimal? id)
         {
-            if (id == null)
+            if (id != null)
             {
-                return NotFound();
+                //return NotFound();
+                this.Producto = null;
             }
 
-            var producto = await _context.Productos.FirstOrDefaultAsync(m => m.Id == id);
-            if (producto == null)
+            this.Producto = await _context.Productos.Include(p => p.CategoriaNavigation).FirstOrDefaultAsync(m => m.Id == id);
+            /*if (producto != null)
             {
-                return NotFound();
+               /* return NotFound();
             }
             else
             {
                 Producto = producto;
-            }
+            }*/
             return Page();
         }
     }

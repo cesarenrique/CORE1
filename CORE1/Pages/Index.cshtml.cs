@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CORE1.Models;
+using System.Security.AccessControl;
+using System.Linq.Expressions;
+
 
 namespace CORE1.Pages
 {
@@ -13,16 +16,49 @@ namespace CORE1.Pages
     {
         private readonly CORE1.Models.TallerEF2 _context;
 
+        public string orden { get; set; }
+
+        public string dir { get; set; }
+
         public IndexModel(CORE1.Models.TallerEF2 context)
         {
             _context = context;
+            orden = "N";
+            dir= "ASC";
         }
 
         public IList<Producto> Producto { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string o="N", string d="ASC")
         {
-            Producto = await _context.Productos
+            IQueryable<Producto> list =from p in _context.Productos select p;
+            Expression<Func<Producto,object>> expresion=(x=>x.Nombre);
+
+            switch (o) { 
+                case "N":
+                    expresion = (x => x.Nombre);
+          
+                    break;
+
+                case "P":
+                    expresion = (x => x.Precio);
+                    break;
+
+                case "C":
+                    expresion = (x => x.CategoriaNavigation.Nombre);
+                    break;
+            }
+            if (d == "ASC")
+            {
+                list = list.OrderBy(expresion);
+            }
+            else
+            {
+                list = list.OrderByDescending(expresion);
+            }
+            dir = (d == "ASC") ? "DESC" : "ASC";
+
+            Producto = await list.AsNoTracking()
                 .Include(p => p.CategoriaNavigation).ToListAsync();
         }
     }

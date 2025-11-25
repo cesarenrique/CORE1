@@ -14,16 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Producto[0].Nombre)
+                <a asp-page="./Index" asp-route-o="N" asp-route-d="@Model.dir">
+                    @Html.DisplayNameFor(model => model.Producto[0].Nombre)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Producto[0].Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Producto[0].Precio)
+                 <a asp-page="./Index" asp-route-o="P" asp-route-d="@Model.dir">
+                    @Html.DisplayNameFor(model => model.Producto[0].Precio)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Producto[0].CategoriaNavigation)
+                <a asp-page="./Index" asp-route-o="C" asp-route-d="@Model.dir">
+                    @Html.DisplayNameFor(model => model.Producto[0].CategoriaNavigation)
+                </a>
             </th>
             <th></th>
         </tr>
