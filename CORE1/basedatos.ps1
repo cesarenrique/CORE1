@@ -1,0 +1,4 @@
+﻿Scaffold-DbContext "Server=localhost;Database=tallercore2; Integrated Security=False; Persist Security Info=False; User ID=cesarenrique26; Password=tupuedes; Encrypt=False" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context TallerEF2 -Force
+
+dotnet ef dbcontext scaffold "Server=localhost;Database=tallercore2; Integrated Security=False; Persist Security Info=False; User ID=cesarenrique26; Password=tupuedes; Encrypt=False" Microsoft.EntityFrameworkCore.SqlServer  -OutputDir Models -Context TallerEF2 -Force
+dotnet ef dbcontext scaffold "Server=localhost;Database=tallercore2; Integrated Security=False; Persist Security Info=False; User ID=cesarenrique26; Password=tupuedes; Encrypt=False" Microsoft.EntityFrameworkCore.SqlServer ` --table Productos  --table Categorias  -OutputDir Models  -Context MiDbContext  -Force

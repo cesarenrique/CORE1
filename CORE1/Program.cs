@@ -3,6 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddDbContext<CORE1.Models.TallerEF2>();
+
 var app = builder.Build();
 
 app.UseStatusCodePagesWithReExecute("/Errors/NotFound");
