@@ -45,6 +45,9 @@
                 @Html.DisplayNameFor(model => model.Producto[0].Descripcion)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Producto[0].Descripcion)
+            </th>
+            <th>
                  <a asp-page="./Index" asp-route-o="P" asp-route-d="@Model.dir">
                     @Html.DisplayNameFor(model => model.Producto[0].Precio)
                 </a>
@@ -63,9 +66,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            <td>
+            <td class="text-truncate d-inline-block" style="max-width: 150px;">
                 @Html.DisplayFor(modelItem => item.Descripcion)
+              
             </td>
+            <td>
+                   <span class="bs-tooltip">
+                         <span class="btn btn-dark">+</span>
+                        <span class="bs-tooltip-text">@Html.DisplayFor(modelItem => item.Descripcion)</span>
+                   </span>
+             </td>
+             
             <td>
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
