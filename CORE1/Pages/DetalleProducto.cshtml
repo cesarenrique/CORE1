@@ -32,12 +32,30 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Producto.Precio)
         </dd>
+
+        @if(Model.Categoria!=null){
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Producto.CategoriaNavigation)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Producto.CategoriaNavigation.Id)
+            @Model.Categoria.Nombre
         </dd>
+        }
+        @if(Model.Marca!=null){
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.MarcaNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Marca.Nombre
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto.MarcaNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Marca.Xurl
+        </dd>
+        }
     </dl>
 </div>
 <div>

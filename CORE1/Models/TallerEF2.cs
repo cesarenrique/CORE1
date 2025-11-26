@@ -17,6 +17,8 @@ public partial class TallerEF2 : DbContext
 
     public virtual DbSet<Categoria> Categorias { get; set; }
 
+    public virtual DbSet<Marca> Marcas { get; set; }
+
     public virtual DbSet<Producto> Productos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,6 +37,21 @@ public partial class TallerEF2 : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
+        });
+
+        modelBuilder.Entity<Marca>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("pk_marcar");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("nombre");
+            entity.Property(e => e.Xurl)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("xurl");
         });
 
         modelBuilder.Entity<Producto>(entity =>
@@ -61,6 +78,10 @@ public partial class TallerEF2 : DbContext
                 .HasForeignKey(d => d.Categoria)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Productos_Categorias");
+
+            entity.HasOne(d => d.MarcaNavigation).WithMany(p => p.Productos)
+            .HasForeignKey(d => d.Marca)
+            .HasConstraintName("fk_productos_marca");
         });
 
         OnModelCreatingPartial(modelBuilder);

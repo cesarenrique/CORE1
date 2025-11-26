@@ -24,6 +24,8 @@ namespace CORE1.Pages
 
         public IList<SelectListItem> Categorias { get; set; } = default!;
 
+        public IList<SelectListItem> Marcas { get; set; } = default!;
+
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
@@ -49,6 +51,17 @@ namespace CORE1.Pages
             listCats.Insert(0, new SelectListItem { Value = "", Text = "Seleccione una categoría" });
             ViewData["Categorias"] = listCats;
             Categorias = listCats;
+
+
+            var listMars = (from c in _context.Marcas
+                            select new SelectListItem
+                            {
+                                Value = c.Id.ToString(),
+                                Text = c.Nombre
+                            }).ToList<SelectListItem>();
+            listMars.Insert(0, new SelectListItem { Value = "", Text = "Seleccione una categoría" });
+            ViewData["Marcas"] = listMars;
+            Marcas = listMars;
             return Page();
         }
     }

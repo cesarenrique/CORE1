@@ -1,14 +1,14 @@
+using CORE1.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using CORE1.Models;
-using System.Security.AccessControl;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.AccessControl;
+using System.Threading.Tasks;
 
 
 namespace CORE1.Pages
@@ -33,7 +33,9 @@ namespace CORE1.Pages
 
         public IList<Producto> Producto { get;set; } = default!;
         public IList<SelectListItem> Categorias { get; set; } = default!;
+        public IList<Categoria> CategoriasX { get; set; } = default!;
 
+        public IList<Marca> MarcasX { get; set; } = default!;
         public async Task OnGetAsync(string o = "N", string d = "ASC", string c = "")
         {
             IQueryable<Producto> list = null;
@@ -88,6 +90,9 @@ namespace CORE1.Pages
                 .Include(p => p.CategoriaNavigation).ToListAsync();
 
             var cats = await _context.Categorias.OrderBy(c => c.Nombre).ToListAsync();
+            CategoriasX = cats;
+            var mar = await _context.Marcas.OrderBy(c => c.Nombre).ToListAsync();
+            MarcasX= mar;
             Categorias = new List<SelectListItem>();
 
             Categorias.Add(new SelectListItem { Value = "", Text = "Todas" });
