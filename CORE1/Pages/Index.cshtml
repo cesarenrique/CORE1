@@ -8,7 +8,7 @@
 
 <form asp-page="./Index" asp-route-o="@Model.orden" asp-route-d="@Model.dir" method="get" class="form">
     <div class="form-group row">
-		<label asp-for="cat" class="form-label col-dm-1 offset-8">Categoria:</label>
+		<label asp-for="cat" class="form-label col-md-1 offset-8">Categoria:</label>
         <div class="col-md-3">
             <select name="c" id="c" asp-for="cat" class="form-select" onchange="this.form.submit()" asp-items="@Model.Categorias">
                 
