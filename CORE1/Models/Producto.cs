@@ -45,5 +45,11 @@ public partial class Producto
 
     public decimal Categoria { get; set; }
 
-    public virtual Categoria CategoriaNavigation { get; set; } = null!;
+
+    [Display(Description = "Categoría o familia",
+        Name = "Categoría",
+        Prompt = "Categoría o familia",
+        ShortName = "Cat."
+        )]
+    public virtual Categoria? CategoriaNavigation { get; set; } = null!;
 }

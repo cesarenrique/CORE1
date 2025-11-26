@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CORE1.Models;
 using System.Security.AccessControl;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace CORE1.Pages
@@ -20,24 +21,49 @@ namespace CORE1.Pages
 
         public string dir { get; set; }
 
+        public string cat { get; set; }
+
         public IndexModel(CORE1.Models.TallerEF2 context)
         {
             _context = context;
             orden = "N";
             dir= "ASC";
+            cat = "";
         }
 
         public IList<Producto> Producto { get;set; } = default!;
+        public IList<SelectListItem> Categorias { get; set; } = default!;
 
-        public async Task OnGetAsync(string o="N", string d="ASC")
+        public async Task OnGetAsync(string o = "N", string d = "ASC", string c = "")
         {
-            IQueryable<Producto> list =from p in _context.Productos select p;
-            Expression<Func<Producto,object>> expresion=(x=>x.Nombre);
+            IQueryable<Producto> list = null;
+            if (String.IsNullOrEmpty(c))
+            {
+                list = from p in _context.Productos select p;
+            }
+            else
+            {
+                try
+                {
+                    decimal idCat = decimal.Parse(c);
+                    list = from p in _context.Productos
+                           where p.Categoria == idCat
+                           select p;
+                }
+                catch (Exception)
+                {
+                    list = from p in _context.Productos select p;
+                }
 
-            switch (o) { 
+            }
+            cat = c;
+            Expression<Func<Producto, object>> expresion = (x => x.Nombre);
+
+            switch (o)
+            {
                 case "N":
                     expresion = (x => x.Nombre);
-          
+
                     break;
 
                 case "P":
@@ -60,6 +86,20 @@ namespace CORE1.Pages
 
             Producto = await list.AsNoTracking()
                 .Include(p => p.CategoriaNavigation).ToListAsync();
+
+            var cats = await _context.Categorias.OrderBy(c => c.Nombre).ToListAsync();
+            Categorias = new List<SelectListItem>();
+
+            Categorias.Add(new SelectListItem { Value = "", Text = "Todas" });
+
+            foreach (var aux in cats)
+            {
+                Categorias.Add(new SelectListItem
+                {
+                    Value = aux.Id.ToString(),
+                    Text = aux.Nombre
+                });
+            }
         }
     }
 }
