@@ -7,6 +7,12 @@ builder.Services.AddDbContext<CORE1.Models.TallerEF2>();
 
 var app = builder.Build();
 
+var cultureInfo = new System.Globalization.CultureInfo("es-ES");
+cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+
+System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultureInfo; 
+System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 app.UseStatusCodePagesWithReExecute("/Errors/NotFound");
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

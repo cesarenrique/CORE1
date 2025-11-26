@@ -49,5 +49,12 @@
 </div>
 
 @section Scripts {
+    <script>
+        function cambioComa(){
+			var valor  =$('#Producto_Precio').val();
+			$('#Producto_Precio').val(valor.replace(',','.'));
+			$('#Producto_Precio').valid();
+		}
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
