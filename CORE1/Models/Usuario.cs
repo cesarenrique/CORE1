@@ -65,6 +65,18 @@ namespace CORE1.Models
         [Column("activo", Order = 7,TypeName = "varchar(1)")]
         public string activo { get; set; }
 
+        public Usuario()
+        {
+            this.id = 0;
+            this.fechaalta = DateTime.Now;
+            this.nombre = "";
+            this.apellidos = "";
+            this.email = "";
+            this.password = "";
+            this.rol = "";
+            this.activo = "S";
+        }
+
         public Usuario(int id=0, DateTime? fechaalta=null, string nombre="", string apellidos="", string email="", string password="", string rol="", string activo="S")
         {
             this.id = id;

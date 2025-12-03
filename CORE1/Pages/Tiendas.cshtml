@@ -1,6 +1,9 @@
 ﻿
 
-@page  
+@page 
+
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 @model CORE1.Pages.TiendasModel
 @{
 	ViewData["Title"] = "Tiendas page";

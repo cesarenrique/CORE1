@@ -1,4 +1,7 @@
 ﻿@page
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
 @model CORE1.Pages.IndexModel
 
 @{
@@ -28,7 +31,7 @@
     <div id="msgError" class="alert alert-danger">@TempData["ok"].ToString()</div>
 }
 <p>
-    <a asp-page="Nuevo" class="btn btn-primary">Nuevo</a>
+    <a asp-page="./Nuevo" class="btn btn-primary">Nuevo</a>
 </p>
 
 @if(Model.Producto.Count > 0)
@@ -95,7 +98,11 @@
             <td>
                 <!--a asp-page="./Edit" asp-route-id="@item.Id">Edit</a---> |
                 <a asp-page="./DetalleProducto/" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>
-                <a asp-page="./Borrar" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+
+	        	@if (User.Identity.IsAuthenticated && HttpContextAccessor.HttpContext.Session.GetString("rol") == "ADMIN")
+                {
+                    <a asp-page="./Borrar" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                }
             </td>
         </tr>
 }

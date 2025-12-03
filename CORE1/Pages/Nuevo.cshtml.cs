@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CORE1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CORE1.Pages
 {
+
+    [Authorize]
     public class NuevoModel : PageModel
     {
         private readonly CORE1.Models.TallerEF2 _context;
