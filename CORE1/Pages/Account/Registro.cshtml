@@ -20,15 +20,15 @@
 	<div class="form-group row">
 		
 		<label asp-for="Usuario.email" class="control-label"></label>
-		<input asp-for="Usuario.email" class="form-control" />
+		<input type="email" asp-for="Usuario.email" class="form-control" />
 	</div>
 	<div class="form-group row">
 		
 			<label asp-for="Usuario.password" class="control-label"></label>
-			<input asp-for="Usuario.password" class="form-control" />
+			<input type="password" asp-for="Usuario.password" class="form-control" />
 	</div>
 		<input type="hidden" asp-for="Usuario.rol" value="CLIENTE" />
-		<input type="hidden" asp-for="Usuario.activo" value="S" />
+		<input type="hidden" asp-for="Usuario.activo" value="N" />
 	
 	<div class=form-group row">
 		<div class="offset-md-3">

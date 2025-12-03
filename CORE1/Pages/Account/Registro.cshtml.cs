@@ -34,7 +34,7 @@ namespace CORE1.Pages.Account
                 // Aquí se podría establecer la sesión del usuario
                 Usuario.fechaalta = DateTime.Now;
                 Usuario.rol = "CLIENTE";
-                Usuario.activo = "S";
+                Usuario.activo = "N";
                 string hash = BCrypt.Net.BCrypt.HashPassword(Usuario.password);
                 Usuario.password = hash;
                 _context.Usuarios.Add(Usuario);

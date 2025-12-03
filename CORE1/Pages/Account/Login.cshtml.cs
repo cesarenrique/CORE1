@@ -90,6 +90,7 @@ namespace CORE1.Pages.Account
                         HttpContext.Session.SetString("usuario", user.email);
                         HttpContext.Session.SetString("nombreUsuario", user.nombre + " " + user.apellidos);
                         HttpContext.Session.SetString("rol", user.rol);
+                        HttpContext.Session.SetInt32("idUsuario", user.id);
                         res = 0;
                     }
                     else

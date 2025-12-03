@@ -1,0 +1,60 @@
+﻿@page
+
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@model CORE1.Pages.UsuarioModificarModel
+
+@{
+    ViewData["Title"] = "Usuarios Modificar";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>UsuarioModificar</h1>
+
+    <h4>Usuario</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Usuario.id" />
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="Usuario.nombre" class="control-label"></label>
+                    <input asp-for="Usuario.nombre" class="form-control" />
+                    <span asp-validation-for="Usuario.nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Usuario.apellidos" class="control-label"></label>
+                    <input asp-for="Usuario.apellidos" class="form-control" />
+                    <span asp-validation-for="Usuario.apellidos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <span class="text-danger">*</span>
+                    <label asp-for="Usuario.email" class="control-label"></label>
+                    <input type="email" asp-for="Usuario.email" class="form-control" />
+                    <span asp-validation-for="Usuario.email" class="text-danger"></span>
+                </div>
+				<input type="hidden" asp-for="Usuario.rol" />
+				<input type="hidden" asp-for="Usuario.activo" />
+				<input type="hidden" asp-for="Usuario.fechaalta" />
+				<input type="hidden" asp-for="Usuario.password" />
+			
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+}
+else
+{
+    <h1>No tienes permiso para ver esta página</h1>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

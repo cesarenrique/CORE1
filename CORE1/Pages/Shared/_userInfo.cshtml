@@ -5,6 +5,7 @@
 <div class="float-end">
 @if(User.Identity.IsAuthenticated)
 {
+		<a class="btn btn-sm btn-info" asp-area="" asp-page="UsuarioModificar" asp-route-id="@HttpContextAccessor.HttpContext.Session.GetInt32("idUsuario")">Modificar</a>
 	<text>
 		Hola, @User.Identity.Name!
 		<form asp-area="" asp-page="/Account/Logout" method="post" class="d-inline">
