@@ -1,6 +1,7 @@
 using CORE1.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
@@ -29,6 +30,7 @@ namespace CORE1.Pages.Account
                 return Page();
             }
             ViewData["ReturnURL"] = returnURL;
+           
             int tipo = ValidateLogin(usu, pwd);
             if (tipo==0)
             {
@@ -65,8 +67,10 @@ namespace CORE1.Pages.Account
             {
                 if(tipo==2)
                     ViewData["error"] = "User inactive.";
+                else if(tipo==3)
+                    ViewData["error"] = "Invalid  password.";
                 else
-                    ViewData["error"] = "Invalid username or password.";
+                    ViewData["error"] = "Invalid  username.";
             }
             return Page();
         }
@@ -77,15 +81,23 @@ namespace CORE1.Pages.Account
             int res= 1;
 
             if (!string.IsNullOrEmpty(usu) && !string.IsNullOrEmpty(pwd)) {
-                Usuario? user = _context.Usuarios.Where(u => u.email == usu && u.password == pwd).FirstOrDefault();
+                Usuario? user = _context.Usuarios.Where(u => u.email == usu).FirstOrDefault();
+               
                 if (user != null && user.activo == "S")
+
                 {
-                    HttpContext.Session.SetString("usuario", user.email);
-                    HttpContext.Session.SetString("nombreUsuario", user.nombre + " " + user.apellidos);
-                    HttpContext.Session.SetString("rol", user.rol);
-                    res = 0;
+                    if (BCrypt.Net.BCrypt.Verify(pwd, user.password)) {
+                        HttpContext.Session.SetString("usuario", user.email);
+                        HttpContext.Session.SetString("nombreUsuario", user.nombre + " " + user.apellidos);
+                        HttpContext.Session.SetString("rol", user.rol);
+                        res = 0;
+                    }
+                    else
+                    {
+                        res = 3;
+                    }
                 }
-                else { 
+                else if(user!=null && user.activo=="N"){ 
 
                     res = 2;
                 }

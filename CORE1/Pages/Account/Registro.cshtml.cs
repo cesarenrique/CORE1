@@ -35,7 +35,8 @@ namespace CORE1.Pages.Account
                 Usuario.fechaalta = DateTime.Now;
                 Usuario.rol = "CLIENTE";
                 Usuario.activo = "S";
-
+                string hash = BCrypt.Net.BCrypt.HashPassword(Usuario.password);
+                Usuario.password = hash;
                 _context.Usuarios.Add(Usuario);
                 await _context.SaveChangesAsync();
                 return Redirect("/Account/Login");
